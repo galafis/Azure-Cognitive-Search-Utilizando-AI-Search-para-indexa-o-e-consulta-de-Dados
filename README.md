@@ -109,3 +109,23 @@ A parte mais legal? Ver a máquina "entendendo" o conteúdo dos textos quase com
 ---
 
 _Projeto desenvolvido para o bootcamp de IA da DIO (Digital Innovation One)._
+
+
+## 📋 Descrição
+
+Descreva aqui o conteúdo desta seção.
+
+
+## 📦 Instalação
+
+Descreva aqui o conteúdo desta seção.
+
+
+## 💻 Uso
+
+Descreva aqui o conteúdo desta seção.
+
+
+## 📄 Licença
+
+Descreva aqui o conteúdo desta seção.
