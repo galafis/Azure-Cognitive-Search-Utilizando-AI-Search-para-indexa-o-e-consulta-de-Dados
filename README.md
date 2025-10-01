@@ -13,7 +13,7 @@
 ![License](https://img.shields.io/github/license/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados?style=for-the-badge)
 
-[**Ver Demo Interativa**](https://galafis.github.io/Azure-AI-Search-Demo/) | [**Documentação da API**](https://galafis.github.io/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados/api-docs)
+[**Ver Código no GitHub**](https://github.com/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados) | [**Documentação Completa**](https://github.com/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados/blob/main/README.md)
 
 ![Azure AI Search Platform](./advanced-hero-image.png)
 
