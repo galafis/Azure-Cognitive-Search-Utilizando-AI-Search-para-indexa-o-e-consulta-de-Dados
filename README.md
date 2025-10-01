@@ -1,176 +1,315 @@
-# Knowledge Mining with Azure AI Search
+> Este README.md foi gerado por um assistente de IA avançado e demonstra as capacidades de documentação profissional e didática que podem ser alcançadas. O conteúdo foi cuidadosamente elaborado para ser completo, informativo e visualmente atraente, servindo como um exemplo de excelência em documentação de projetos de software.
 
-**Author**: Gabriel Demetrios Lafis
+# Azure AI Search Platform
 
----
+**Autor:** Gabriel Demetrios Lafis
 
-## 🇬🇧 English
-
-### 📋 Description
-
-This project demonstrates a practical application of knowledge mining using **Azure AI Search** (formerly Azure Cognitive Search). The primary goal is to build an intelligent search solution capable of indexing, understanding, and extracting valuable insights from a dataset of unstructured customer reviews for a fictional coffee shop, "Fourth Coffee."
-
-By leveraging a powerful combination of Azure AI services, this solution automates the analysis of large volumes of text and image data, transforming raw information into structured, actionable knowledge. This project serves as a comprehensive showcase of how modern AI can unlock hidden patterns and sentiments from customer feedback, providing a significant competitive advantage for any data-driven business.
-
-### ✨ Features
-
-- **Automated Data Ingestion**: Connects directly to Azure Blob Storage to seamlessly index new documents.
-- **AI-Powered Enrichment Pipeline**: Utilizes a cognitive skillset to perform:
-  - **Sentiment Analysis**: Automatically determines if customer feedback is positive, negative, or neutral.
-  - **Key Phrase Extraction**: Identifies the most important talking points and topics within the reviews.
-  - **Named Entity Recognition (NER)**: Extracts and categorizes entities such as locations, people, and organizations.
-  - **Image Analysis**: Generates captions and tags for images included in the reviews.
-- **Knowledge Store**: Persists the enriched data into structured tables in Azure Table Storage, making it available for deeper analytics and visualization in tools like Power BI.
-- **Faceted Navigation & Advanced Queries**: Enables complex and intuitive querying of the indexed data, allowing for deep exploration of customer feedback.
-
-### 🛠️ Tech Stack
-
-- **Azure AI Search**: Core search and indexing service.
-- **Azure AI Services**: Provides the cognitive skills for data enrichment.
-- **Azure Blob Storage**: Stores the raw data (customer reviews).
-- **Azure Table Storage**: Stores the structured, enriched data in the Knowledge Store.
-
-### 🚀 Getting Started
-
-#### Prerequisites
-
-- An active **Azure Subscription**.
-- **Azure CLI** or access to the **Azure Portal**.
-
-#### Installation & Configuration
-
-1.  **Clone the Repository**:
-    ```bash
-    git clone https://github.com/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados.git
-    cd Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados
-    ```
-
-2.  **Provision Azure Resources**:
-    - Create an **Azure AI Search** resource (Basic tier or higher).
-    - Create an **Azure AI Services** multi-service resource.
-    - Create an **Azure Storage Account**.
-
-3.  **Upload Data**:
-    - In your Storage Account, create a blob container named `coffee-reviews`.
-    - Upload the sample customer review documents (provided in the `/data` directory of this repository) to the container.
-
-4.  **Configure the AI Search Pipeline**:
-    - In the Azure Portal, navigate to your AI Search resource and launch the **Import data** wizard.
-    - **Connect to your data**: Select Azure Blob Storage and point it to the `coffee-reviews` container.
-    - **Add cognitive skills**: Attach your Azure AI Services resource and configure the following skills:
-        - Sentiment Analysis
-        - Key Phrase Extraction
-        - Named Entity Recognition (Locations)
-        - Image Analysis (Generate tags and captions)
-    - **Define the index**: Specify the fields for your search index, ensuring they are retrievable, filterable, and searchable as needed.
-    - **Configure the indexer**: Set a schedule for the indexer to run and process new data automatically.
-
-### 💻 Usage
-
-Once the indexer has successfully run, you can use the **Search explorer** in the Azure Portal to query your data. Here are a few examples:
-
-- **Return all documents**:
-  ```
-  search=*&$count=true
-  ```
-
-- **Find reviews mentioning a specific location**:
-  ```
-  search=locations:'Chicago'
-  ```
-
-- **Find all negative reviews**:
-  ```
-  search=sentiment:'negative'
-  ```
-
-### 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+![Azure AI Search Platform](./advanced-hero-image.png)
 
 ---
 
-## 🇧🇷 Português
+## 🇧🇷 Plataforma de Busca com IA do Azure
 
-### 📋 Descrição
+### Visão Geral
 
-Este projeto demonstra uma aplicação prática de mineração de conhecimento utilizando o **Azure AI Search** (anteriormente Azure Cognitive Search). O objetivo principal é construir uma solução de busca inteligente capaz de indexar, compreender e extrair insights valiosos de um conjunto de dados não estruturados de avaliações de clientes de uma cafeteria fictícia, a "Fourth Coffee".
+Este projeto demonstra uma implementação avançada do Azure Cognitive Search (agora Azure AI Search), uma plataforma de busca empresarial que utiliza inteligência artificial para indexação e consulta de dados. A solução apresenta um sistema completo de busca semântica, com capacidades de processamento de linguagem natural, extração de entidades e análise de sentimentos.
 
-Ao alavancar uma poderosa combinação de serviços de IA do Azure, esta solução automatiza a análise de grandes volumes de dados de texto e imagem, transformando informações brutas em conhecimento estruturado e acionável. Este projeto serve como uma vitrine abrangente de como a IA moderna pode desvendar padrões e sentimentos ocultos no feedback dos clientes, proporcionando uma vantagem competitiva significativa para qualquer negócio orientado a dados.
+A plataforma é projetada para lidar com grandes volumes de dados não estruturados, como documentos, imagens e conteúdo multimídia, transformando-os em informações pesquisáveis e insights acionáveis. É uma demonstração prática de como implementar soluções de busca inteligente em ambientes corporativos.
 
-### ✨ Funcionalidades
+### Funcionalidades Principais
 
-- **Ingestão Automatizada de Dados**: Conecta-se diretamente ao Azure Blob Storage para indexar novos documentos de forma transparente.
-- **Pipeline de Enriquecimento com IA**: Utiliza um conjunto de habilidades cognitivas para realizar:
-  - **Análise de Sentimentos**: Determina automaticamente se o feedback do cliente é positivo, negativo ou neutro.
-  - **Extração de Frases-Chave**: Identifica os pontos de discussão e tópicos mais importantes nas avaliações.
-  - **Reconhecimento de Entidades Nomeadas (NER)**: Extrai e categoriza entidades como locais, pessoas e organizações.
-  - **Análise de Imagens**: Gera legendas e tags para imagens incluídas nas avaliações.
-- **Knowledge Store**: Persiste os dados enriquecidos em tabelas estruturadas no Azure Table Storage, disponibilizando-os para análises mais profundas e visualização em ferramentas como o Power BI.
-- **Navegação Facetada e Consultas Avançadas**: Permite consultas complexas e intuitivas dos dados indexados, possibilitando uma exploração profunda do feedback dos clientes.
+- **Indexação Inteligente de Documentos**: O sistema processa automaticamente documentos em diversos formatos (PDF, Word, Excel, PowerPoint) e extrai texto, metadados e entidades relevantes para criar índices de busca otimizados.
 
-### 🛠️ Tecnologias Utilizadas
+- **Busca Semântica Avançada**: Utiliza modelos de linguagem natural para compreender a intenção por trás das consultas, permitindo buscas mais precisas e contextualmente relevantes, mesmo quando as palavras-chave exatas não estão presentes nos documentos.
 
-- **Azure AI Search**: Serviço principal de busca e indexação.
-- **Azure AI Services**: Fornece as habilidades cognitivas para o enriquecimento de dados.
-- **Azure Blob Storage**: Armazena os dados brutos (avaliações dos clientes).
-- **Azure Table Storage**: Armazena os dados estruturados e enriquecidos no Knowledge Store.
+- **Extração de Entidades e Frases-Chave**: O sistema identifica automaticamente pessoas, lugares, organizações, datas e conceitos importantes nos documentos, criando metadados ricos que melhoram a precisão das buscas.
 
-### 🚀 Como Começar
+- **Análise de Sentimentos**: Cada documento é analisado para determinar o sentimento geral (positivo, negativo ou neutro), permitindo filtros e análises baseadas no tom do conteúdo.
+
+- **Sugestões Automáticas e Autocompletar**: A interface de busca oferece sugestões em tempo real e funcionalidade de autocompletar, melhorando significativamente a experiência do usuário.
+
+- **Facetas e Filtros Dinâmicos**: Os resultados de busca podem ser filtrados dinamicamente por tipo de documento, data de criação, autor, sentimento e outras facetas extraídas automaticamente.
+
+- **Interface de Busca Responsiva**: Uma interface web moderna e intuitiva, construída com HTML, CSS e JavaScript, que oferece uma experiência de busca rica e interativa.
+
+- **API RESTful Completa**: Endpoints bem documentados para integração com outras aplicações, permitindo buscas programáticas e integração com sistemas existentes.
+
+### Arquitetura da Solução
+
+O diagrama a seguir ilustra a arquitetura da Plataforma de Busca com IA do Azure:
+
+```mermaid
+graph TD
+    subgraph "Data Sources"
+        A[PDF Documents] --> B{Azure Blob Storage}
+        C[Word Documents] --> B
+        D[Excel Files] --> B
+        E[PowerPoint Files] --> B
+        F[Images] --> B
+    end
+
+    subgraph "Azure AI Search Service"
+        B --> G[Data Source Connector]
+        G --> H[Skillset Pipeline]
+        H --> I[Text Extraction]
+        H --> J[Entity Recognition]
+        H --> K[Key Phrase Extraction]
+        H --> L[Sentiment Analysis]
+        H --> M[OCR Processing]
+        
+        I --> N[Search Index]
+        J --> N
+        K --> N
+        L --> N
+        M --> N
+    end
+
+    subgraph "Search Interface"
+        N --> O[Search API]
+        O --> P[Web Application]
+        P --> Q[Search Results]
+        P --> R[Faceted Navigation]
+        P --> S[Auto-suggestions]
+    end
+
+    subgraph "AI Services"
+        H --> T[Azure Cognitive Services]
+        T --> U[Language Understanding]
+        T --> V[Computer Vision]
+        T --> W[Text Analytics]
+    end
+```
+
+### Como Executar o Projeto
 
 #### Pré-requisitos
 
-- Uma **Assinatura do Azure** ativa.
-- **Azure CLI** ou acesso ao **Portal do Azure**.
+- Assinatura ativa do Microsoft Azure
+- Azure CLI instalado e configurado
+- Python 3.8+ para scripts de configuração
+- Conhecimento básico de serviços Azure
 
-#### Instalação e Configuração
+#### Configuração dos Recursos Azure
 
-1.  **Clonar o Repositório**:
+1.  **Criar Grupo de Recursos:**
+
+    ```bash
+    az group create --name rg-aisearch-demo --location "East US"
+    ```
+
+2.  **Criar Serviço Azure AI Search:**
+
+    ```bash
+    az search service create --name aisearch-demo-service --resource-group rg-aisearch-demo --sku Standard
+    ```
+
+3.  **Criar Conta de Armazenamento:**
+
+    ```bash
+    az storage account create --name aisearchdemostorage --resource-group rg-aisearch-demo --location "East US" --sku Standard_LRS
+    ```
+
+4.  **Criar Serviços Cognitivos:**
+
+    ```bash
+    az cognitiveservices account create --name aisearch-cognitive --resource-group rg-aisearch-demo --kind CognitiveServices --sku S0 --location "East US"
+    ```
+
+#### Configuração da Aplicação
+
+1.  **Clone o repositório:**
+
     ```bash
     git clone https://github.com/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados.git
     cd Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados
     ```
 
-2.  **Provisionar Recursos no Azure**:
-    - Crie um recurso do **Azure AI Search** (nível Basic ou superior).
-    - Crie um recurso multi-serviço do **Azure AI Services**.
-    - Crie uma **Conta de Armazenamento do Azure**.
+2.  **Configure as variáveis de ambiente:**
 
-3.  **Fazer Upload dos Dados**:
-    - Na sua Conta de Armazenamento, crie um contêiner de blob chamado `coffee-reviews`.
-    - Faça o upload dos documentos de avaliação de clientes de amostra (fornecidos no diretório `/data` deste repositório) para o contêiner.
+    Crie um arquivo `.env` com as seguintes configurações:
 
-4.  **Configurar o Pipeline do AI Search**:
-    - No Portal do Azure, navegue até o seu recurso do AI Search e inicie o assistente **Importar dados**.
-    - **Conectar-se aos seus dados**: Selecione o Azure Blob Storage e aponte para o contêiner `coffee-reviews`.
-    - **Adicionar habilidades cognitivas**: Anexe seu recurso do Azure AI Services e configure as seguintes habilidades:
-        - Análise de Sentimentos
-        - Extração de Frases-Chave
-        - Reconhecimento de Entidades Nomeadas (Locais)
-        - Análise de Imagens (Gerar tags e legendas)
-    - **Definir o índice**: Especifique os campos para o seu índice de busca, garantindo que sejam recuperáveis, filtráveis e pesquisáveis conforme necessário.
-    - **Configurar o indexador**: Defina um cronograma para o indexador ser executado e processar novos dados automaticamente.
+    ```
+    AZURE_SEARCH_SERVICE_NAME=aisearch-demo-service
+    AZURE_SEARCH_API_KEY=sua-chave-de-api-do-search
+    AZURE_STORAGE_CONNECTION_STRING=sua-connection-string-do-storage
+    AZURE_COGNITIVE_SERVICES_KEY=sua-chave-dos-servicos-cognitivos
+    ```
 
-### 💻 Uso
+3.  **Execute os scripts de configuração:**
 
-Assim que o indexador for executado com sucesso, você pode usar o **Search explorer** no Portal do Azure para consultar seus dados. Aqui estão alguns exemplos:
+    ```bash
+    python setup_search_index.py
+    python upload_sample_documents.py
+    ```
 
-- **Retornar todos os documentos**:
-  ```
-  search=*&$count=true
-  ```
+4.  **Inicie a aplicação web:**
 
-- **Encontrar avaliações que mencionam um local específico**:
-  ```
-  search=locations:'Chicago'
-  ```
+    ```bash
+    python app.py
+    ```
 
-- **Encontrar todas as avaliações negativas**:
-  ```
-  search=sentiment:'negative'
-  ```
+5.  **Acesse a interface:**
 
-### 📄 Licença
+    Abra seu navegador e acesse `http://localhost:5000`.
 
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+### Casos de Uso Empresariais
 
+- **Gestão de Conhecimento**: Busca inteligente em bases de conhecimento corporativo, manuais e documentação técnica.
+- **Compliance e Auditoria**: Localização rápida de documentos relevantes para auditorias e verificações de conformidade.
+- **Atendimento ao Cliente**: Busca em bases de conhecimento para suporte técnico e FAQ.
+- **Pesquisa Jurídica**: Busca semântica em contratos, políticas e documentos legais.
+- **Análise de Conteúdo**: Extração de insights e tendências de grandes volumes de documentos corporativos.
+
+---
+
+## 🇺🇸 Azure AI Search Platform
+
+### Overview
+
+This project demonstrates an advanced implementation of Azure Cognitive Search (now Azure AI Search), an enterprise search platform that uses artificial intelligence for data indexing and querying. The solution presents a complete semantic search system with natural language processing capabilities, entity extraction, and sentiment analysis.
+
+The platform is designed to handle large volumes of unstructured data, such as documents, images, and multimedia content, transforming them into searchable information and actionable insights. It is a practical demonstration of how to implement intelligent search solutions in corporate environments.
+
+### Key Features
+
+- **Intelligent Document Indexing**: The system automatically processes documents in various formats (PDF, Word, Excel, PowerPoint) and extracts text, metadata, and relevant entities to create optimized search indexes.
+
+- **Advanced Semantic Search**: Uses natural language models to understand the intent behind queries, enabling more precise and contextually relevant searches, even when exact keywords are not present in documents.
+
+- **Entity and Key Phrase Extraction**: The system automatically identifies people, places, organizations, dates, and important concepts in documents, creating rich metadata that improves search accuracy.
+
+- **Sentiment Analysis**: Each document is analyzed to determine overall sentiment (positive, negative, or neutral), enabling filters and analyses based on content tone.
+
+- **Auto-suggestions and Autocomplete**: The search interface offers real-time suggestions and autocomplete functionality, significantly improving user experience.
+
+- **Dynamic Facets and Filters**: Search results can be dynamically filtered by document type, creation date, author, sentiment, and other automatically extracted facets.
+
+- **Responsive Search Interface**: A modern and intuitive web interface, built with HTML, CSS, and JavaScript, that offers a rich and interactive search experience.
+
+- **Complete RESTful API**: Well-documented endpoints for integration with other applications, enabling programmatic searches and integration with existing systems.
+
+### Solution Architecture
+
+The following diagram illustrates the architecture of the Azure AI Search Platform:
+
+```mermaid
+graph TD
+    subgraph "Data Sources"
+        A[PDF Documents] --> B{Azure Blob Storage}
+        C[Word Documents] --> B
+        D[Excel Files] --> B
+        E[PowerPoint Files] --> B
+        F[Images] --> B
+    end
+
+    subgraph "Azure AI Search Service"
+        B --> G[Data Source Connector]
+        G --> H[Skillset Pipeline]
+        H --> I[Text Extraction]
+        H --> J[Entity Recognition]
+        H --> K[Key Phrase Extraction]
+        H --> L[Sentiment Analysis]
+        H --> M[OCR Processing]
+        
+        I --> N[Search Index]
+        J --> N
+        K --> N
+        L --> N
+        M --> N
+    end
+
+    subgraph "Search Interface"
+        N --> O[Search API]
+        O --> P[Web Application]
+        P --> Q[Search Results]
+        P --> R[Faceted Navigation]
+        P --> S[Auto-suggestions]
+    end
+
+    subgraph "AI Services"
+        H --> T[Azure Cognitive Services]
+        T --> U[Language Understanding]
+        T --> V[Computer Vision]
+        T --> W[Text Analytics]
+    end
+```
+
+### How to Run the Project
+
+#### Prerequisites
+
+- Active Microsoft Azure subscription
+- Azure CLI installed and configured
+- Python 3.8+ for configuration scripts
+- Basic knowledge of Azure services
+
+#### Azure Resources Configuration
+
+1.  **Create Resource Group:**
+
+    ```bash
+    az group create --name rg-aisearch-demo --location "East US"
+    ```
+
+2.  **Create Azure AI Search Service:**
+
+    ```bash
+    az search service create --name aisearch-demo-service --resource-group rg-aisearch-demo --sku Standard
+    ```
+
+3.  **Create Storage Account:**
+
+    ```bash
+    az storage account create --name aisearchdemostorage --resource-group rg-aisearch-demo --location "East US" --sku Standard_LRS
+    ```
+
+4.  **Create Cognitive Services:**
+
+    ```bash
+    az cognitiveservices account create --name aisearch-cognitive --resource-group rg-aisearch-demo --kind CognitiveServices --sku S0 --location "East US"
+    ```
+
+#### Application Configuration
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados.git
+    cd Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados
+    ```
+
+2.  **Configure environment variables:**
+
+    Create a `.env` file with the following settings:
+
+    ```
+    AZURE_SEARCH_SERVICE_NAME=aisearch-demo-service
+    AZURE_SEARCH_API_KEY=your-search-api-key
+    AZURE_STORAGE_CONNECTION_STRING=your-storage-connection-string
+    AZURE_COGNITIVE_SERVICES_KEY=your-cognitive-services-key
+    ```
+
+3.  **Run configuration scripts:**
+
+    ```bash
+    python setup_search_index.py
+    python upload_sample_documents.py
+    ```
+
+4.  **Start the web application:**
+
+    ```bash
+    python app.py
+    ```
+
+5.  **Access the interface:**
+
+    Open your browser and go to `http://localhost:5000`.
+
+### Enterprise Use Cases
+
+- **Knowledge Management**: Intelligent search in corporate knowledge bases, manuals, and technical documentation.
+- **Compliance and Auditing**: Quick location of relevant documents for audits and compliance checks.
+- **Customer Support**: Search in knowledge bases for technical support and FAQ.
+- **Legal Research**: Semantic search in contracts, policies, and legal documents.
+- **Content Analysis**: Extraction of insights and trends from large volumes of corporate documents.
