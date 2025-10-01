@@ -1,10 +1,15 @@
-> Este README.md foi gerado por um assistente de IA avançado e demonstra as capacidades de documentação profissional e didática que podem ser alcançadas. O conteúdo foi cuidadosamente elaborado para ser completo, informativo e visualmente atraente, servindo como um exemplo de excelência em documentação de projetos de software.
+
 
 # Azure AI Search Platform
 
 **Autor:** Gabriel Demetrios Lafis
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados/ci-cd.yml?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)
+![Azure](https://img.shields.io/badge/Microsoft-Azure-blue?style=for-the-badge&logo=microsoft-azure&logoColor=white)
+![Azure AI Search](https://img.shields.io/badge/Azure-AI%20Search-blue?style=for-the-badge&logo=microsoft-azure&logoColor=white)
+![Azure Cognitive Services](https://img.shields.io/badge/Azure-Cognitive%20Services-blue?style=for-the-badge&logo=microsoft-azure&logoColor=white)
+![REST API](https://img.shields.io/badge/REST-API-green?style=for-the-badge&logo=api&logoColor=white)
+![JSON](https://img.shields.io/badge/JSON-Data-orange?style=for-the-badge&logo=json&logoColor=white)
 ![License](https://img.shields.io/github/license/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados?style=for-the-badge)
 
