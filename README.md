@@ -17,6 +17,7 @@
 
 ![Azure AI Search Platform](./advanced-hero-image.png)
 
+
 ## 📁 Estrutura do Projeto
 
 ```
