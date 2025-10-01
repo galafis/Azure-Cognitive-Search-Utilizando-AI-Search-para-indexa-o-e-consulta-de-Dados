@@ -1,131 +1,176 @@
-# Mineração de Conhecimento com Azure AI Search: Minha Experiência Prática
+# Knowledge Mining with Azure AI Search
 
-## Introdução
-
-E aí, pessoal! Acabei de finalizar um projeto super interessante na área de IA para o bootcamp da DIO. Trabalhei com ferramentas de mineração de conhecimento usando o Azure AI Search e queria compartilhar com vocês como foi esse processo!
-
-Neste projeto, precisei organizar e extrair insights de um conjunto de avaliações de clientes de uma cafeteria fictícia chamada "Fourth Coffee". Sem essas ferramentas de IA, analisar manualmente todo esse conteúdo seria um pesadelo, principalmente quando precisamos extrair informações específicas como sentimentos, locais mencionados e palavras-chave importantes.
-
-## O que eu aprendi e fiz
-
-### Configurando o ambiente no Azure
-
-Primeiro, precisei criar alguns recursos no Azure:
-
-- Um serviço de **Azure AI Search** (escolhi o plano Basic pra economizar)
-- Um recurso de **Azure AI Services** pra usar as funcionalidades de IA
-- Uma **conta de armazenamento** pra guardar os documentos originais e resultados
-
-Foi bem tranquilo de configurar, mas confesso que demorei um pouco pra entender como tudo se conectava. Basicamente, o Azure AI Search usa as habilidades do Azure AI Services para processar os documentos armazenados no Storage.
-
-### Subindo os documentos para análise
-
-Baixei os arquivos de avaliações dos clientes do link que o professor disponibilizou e criei um container chamado `coffee-reviews` na minha conta de armazenamento. Depois, fiz o upload de tudo para lá. São vários documentos em formato de texto e algumas imagens também.
-
-### A parte mais legal: processamento com IA!
-
-Aí veio a parte que achei mais maneira do projeto. Usei o assistente de importação do Azure AI Search para:
-
-1. Conectar na minha fonte de dados (o container com as avaliações)
-2. Configurar um conjunto de "habilidades cognitivas" para extrair:
-   - Locais mencionados nas avaliações
-   - Frases-chave importantes
-   - Sentimentos (positivo, negativo, neutro)
-   - Tags e legendas para as imagens
-
-Achei particularmente interessante a parte de extração de sentimentos. É impressionante como a IA consegue entender o tom de uma avaliação!
-
-### Knowledge Store: salvando os resultados
-
-Uma funcionalidade que não conhecia antes era o Knowledge Store. Basicamente, ele salva todos os dados enriquecidos em um formato estruturado para análises futuras. Configurei o sistema para salvar:
-
-- Documentos completos processados
-- Frases-chave extraídas
-- Entidades (como locais)
-- Informações de imagens
-
-Isso criou várias tabelas na minha conta de armazenamento que posso acessar depois para análises mais detalhadas ou até conectar com o Power BI!
-
-### Hora de testar: fazendo consultas
-
-Depois que o indexador terminou de processar tudo (demorou uns 5 minutos), pude finalmente fazer algumas consultas no índice:
-
-```
-search=*&$count=true
-```
-Essa consulta retornou todas as avaliações - achei 21 documentos no total.
-
-```
-search=locations:'Chicago'
-```
-Com essa, filtrei só as avaliações que mencionavam Chicago - foram 3 resultados.
-
-```
-search=sentiment:'negative'
-```
-E aqui encontrei apenas 1 avaliação negativa! Ótimo para a cafeteria fictícia, né?
-
-## O que descobri analisando os dados
-
-Fazendo algumas análises, consegui extrair alguns insights interessantes:
-
-1. A maioria das avaliações eram positivas (o que é um bom sinal!)
-2. A única avaliação negativa mencionava problemas com o tempo de espera
-3. As palavras-chave mais comuns estavam relacionadas ao "sabor do café", "ambiente" e "atendimento"
-4. Várias avaliações mencionavam locais específicos, o que sugere que a cafeteria tem várias unidades
-
-Achei muito maneiro como consegui extrair essas informações sem precisar ler manualmente cada avaliação!
-
-## Dificuldades que enfrentei
-
-Nem tudo foram flores! Tive alguns desafios pelo caminho:
-
-- Entender a diferença entre skillset, indexer, index e data source foi confuso no começo
-- Algumas configurações avançadas como "Base-64 Encode Keys" não estavam bem explicadas na documentação
-- A primeira vez que executei o indexador, ele falhou porque esqueci de habilitar o acesso anônimo a blobs
-
-Mas no final, depois de algumas tentativas e consultas à documentação, consegui resolver tudo!
-
-## O que achei do projeto como um todo
-
-Como estudante de ciência de dados, achei esse projeto muito relevante pro mercado atual. Muitas empresas têm toneladas de dados não estruturados (textos, imagens, etc.) e ferramentas como o Azure AI Search podem ajudar muito a extrair valor desses dados.
-
-O legal é que, mesmo sem precisar programar muito (usei principalmente a interface do Azure), consegui criar um pipeline completo de processamento de dados. Claro que se eu quisesse customizar mais, poderia usar a API com Python ou mesmo integrar com outras ferramentas.
-
-## Conclusão
-
-No geral, foi uma experiência super válida! Consegui entender na prática como funciona um sistema de mineração de conhecimento e como as tecnologias de IA podem ser aplicadas em cenários reais de negócio.
-
-A parte mais legal? Ver a máquina "entendendo" o conteúdo dos textos quase como um humano faria, extraindo sentimentos, identificando entidades e resumindo os pontos principais. Definitivamente vou considerar usar essas ferramentas em projetos futuros da faculdade e, quem sabe, no mercado de trabalho!
+**Author**: Gabriel Demetrios Lafis
 
 ---
 
-## Links úteis que me ajudaram
+## 🇬🇧 English
 
-- [Documentação do Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
-- [Tutorial oficial da Microsoft que segui](https://microsoftlearning.github.io/mslearn-ai-fundamentals/Instructions/Labs/11-ai-search.html)
-- [Dicas de configuração de skillsets](https://learn.microsoft.com/en-us/azure/search/cognitive-search-defining-skillset)
+### 📋 Description
+
+This project demonstrates a practical application of knowledge mining using **Azure AI Search** (formerly Azure Cognitive Search). The primary goal is to build an intelligent search solution capable of indexing, understanding, and extracting valuable insights from a dataset of unstructured customer reviews for a fictional coffee shop, "Fourth Coffee."
+
+By leveraging a powerful combination of Azure AI services, this solution automates the analysis of large volumes of text and image data, transforming raw information into structured, actionable knowledge. This project serves as a comprehensive showcase of how modern AI can unlock hidden patterns and sentiments from customer feedback, providing a significant competitive advantage for any data-driven business.
+
+### ✨ Features
+
+- **Automated Data Ingestion**: Connects directly to Azure Blob Storage to seamlessly index new documents.
+- **AI-Powered Enrichment Pipeline**: Utilizes a cognitive skillset to perform:
+  - **Sentiment Analysis**: Automatically determines if customer feedback is positive, negative, or neutral.
+  - **Key Phrase Extraction**: Identifies the most important talking points and topics within the reviews.
+  - **Named Entity Recognition (NER)**: Extracts and categorizes entities such as locations, people, and organizations.
+  - **Image Analysis**: Generates captions and tags for images included in the reviews.
+- **Knowledge Store**: Persists the enriched data into structured tables in Azure Table Storage, making it available for deeper analytics and visualization in tools like Power BI.
+- **Faceted Navigation & Advanced Queries**: Enables complex and intuitive querying of the indexed data, allowing for deep exploration of customer feedback.
+
+### 🛠️ Tech Stack
+
+- **Azure AI Search**: Core search and indexing service.
+- **Azure AI Services**: Provides the cognitive skills for data enrichment.
+- **Azure Blob Storage**: Stores the raw data (customer reviews).
+- **Azure Table Storage**: Stores the structured, enriched data in the Knowledge Store.
+
+### 🚀 Getting Started
+
+#### Prerequisites
+
+- An active **Azure Subscription**.
+- **Azure CLI** or access to the **Azure Portal**.
+
+#### Installation & Configuration
+
+1.  **Clone the Repository**:
+    ```bash
+    git clone https://github.com/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados.git
+    cd Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados
+    ```
+
+2.  **Provision Azure Resources**:
+    - Create an **Azure AI Search** resource (Basic tier or higher).
+    - Create an **Azure AI Services** multi-service resource.
+    - Create an **Azure Storage Account**.
+
+3.  **Upload Data**:
+    - In your Storage Account, create a blob container named `coffee-reviews`.
+    - Upload the sample customer review documents (provided in the `/data` directory of this repository) to the container.
+
+4.  **Configure the AI Search Pipeline**:
+    - In the Azure Portal, navigate to your AI Search resource and launch the **Import data** wizard.
+    - **Connect to your data**: Select Azure Blob Storage and point it to the `coffee-reviews` container.
+    - **Add cognitive skills**: Attach your Azure AI Services resource and configure the following skills:
+        - Sentiment Analysis
+        - Key Phrase Extraction
+        - Named Entity Recognition (Locations)
+        - Image Analysis (Generate tags and captions)
+    - **Define the index**: Specify the fields for your search index, ensuring they are retrievable, filterable, and searchable as needed.
+    - **Configure the indexer**: Set a schedule for the indexer to run and process new data automatically.
+
+### 💻 Usage
+
+Once the indexer has successfully run, you can use the **Search explorer** in the Azure Portal to query your data. Here are a few examples:
+
+- **Return all documents**:
+  ```
+  search=*&$count=true
+  ```
+
+- **Find reviews mentioning a specific location**:
+  ```
+  search=locations:'Chicago'
+  ```
+
+- **Find all negative reviews**:
+  ```
+  search=sentiment:'negative'
+  ```
+
+### 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-_Projeto desenvolvido para o bootcamp de IA da DIO (Digital Innovation One)._
+## 🇧🇷 Português
 
+### 📋 Descrição
 
-## 📋 Descrição
+Este projeto demonstra uma aplicação prática de mineração de conhecimento utilizando o **Azure AI Search** (anteriormente Azure Cognitive Search). O objetivo principal é construir uma solução de busca inteligente capaz de indexar, compreender e extrair insights valiosos de um conjunto de dados não estruturados de avaliações de clientes de uma cafeteria fictícia, a "Fourth Coffee".
 
-Descreva aqui o conteúdo desta seção.
+Ao alavancar uma poderosa combinação de serviços de IA do Azure, esta solução automatiza a análise de grandes volumes de dados de texto e imagem, transformando informações brutas em conhecimento estruturado e acionável. Este projeto serve como uma vitrine abrangente de como a IA moderna pode desvendar padrões e sentimentos ocultos no feedback dos clientes, proporcionando uma vantagem competitiva significativa para qualquer negócio orientado a dados.
 
+### ✨ Funcionalidades
 
-## 📦 Instalação
+- **Ingestão Automatizada de Dados**: Conecta-se diretamente ao Azure Blob Storage para indexar novos documentos de forma transparente.
+- **Pipeline de Enriquecimento com IA**: Utiliza um conjunto de habilidades cognitivas para realizar:
+  - **Análise de Sentimentos**: Determina automaticamente se o feedback do cliente é positivo, negativo ou neutro.
+  - **Extração de Frases-Chave**: Identifica os pontos de discussão e tópicos mais importantes nas avaliações.
+  - **Reconhecimento de Entidades Nomeadas (NER)**: Extrai e categoriza entidades como locais, pessoas e organizações.
+  - **Análise de Imagens**: Gera legendas e tags para imagens incluídas nas avaliações.
+- **Knowledge Store**: Persiste os dados enriquecidos em tabelas estruturadas no Azure Table Storage, disponibilizando-os para análises mais profundas e visualização em ferramentas como o Power BI.
+- **Navegação Facetada e Consultas Avançadas**: Permite consultas complexas e intuitivas dos dados indexados, possibilitando uma exploração profunda do feedback dos clientes.
 
-Descreva aqui o conteúdo desta seção.
+### 🛠️ Tecnologias Utilizadas
 
+- **Azure AI Search**: Serviço principal de busca e indexação.
+- **Azure AI Services**: Fornece as habilidades cognitivas para o enriquecimento de dados.
+- **Azure Blob Storage**: Armazena os dados brutos (avaliações dos clientes).
+- **Azure Table Storage**: Armazena os dados estruturados e enriquecidos no Knowledge Store.
 
-## 💻 Uso
+### 🚀 Como Começar
 
-Descreva aqui o conteúdo desta seção.
+#### Pré-requisitos
 
+- Uma **Assinatura do Azure** ativa.
+- **Azure CLI** ou acesso ao **Portal do Azure**.
 
-## 📄 Licença
+#### Instalação e Configuração
 
-Descreva aqui o conteúdo desta seção.
+1.  **Clonar o Repositório**:
+    ```bash
+    git clone https://github.com/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados.git
+    cd Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados
+    ```
+
+2.  **Provisionar Recursos no Azure**:
+    - Crie um recurso do **Azure AI Search** (nível Basic ou superior).
+    - Crie um recurso multi-serviço do **Azure AI Services**.
+    - Crie uma **Conta de Armazenamento do Azure**.
+
+3.  **Fazer Upload dos Dados**:
+    - Na sua Conta de Armazenamento, crie um contêiner de blob chamado `coffee-reviews`.
+    - Faça o upload dos documentos de avaliação de clientes de amostra (fornecidos no diretório `/data` deste repositório) para o contêiner.
+
+4.  **Configurar o Pipeline do AI Search**:
+    - No Portal do Azure, navegue até o seu recurso do AI Search e inicie o assistente **Importar dados**.
+    - **Conectar-se aos seus dados**: Selecione o Azure Blob Storage e aponte para o contêiner `coffee-reviews`.
+    - **Adicionar habilidades cognitivas**: Anexe seu recurso do Azure AI Services e configure as seguintes habilidades:
+        - Análise de Sentimentos
+        - Extração de Frases-Chave
+        - Reconhecimento de Entidades Nomeadas (Locais)
+        - Análise de Imagens (Gerar tags e legendas)
+    - **Definir o índice**: Especifique os campos para o seu índice de busca, garantindo que sejam recuperáveis, filtráveis e pesquisáveis conforme necessário.
+    - **Configurar o indexador**: Defina um cronograma para o indexador ser executado e processar novos dados automaticamente.
+
+### 💻 Uso
+
+Assim que o indexador for executado com sucesso, você pode usar o **Search explorer** no Portal do Azure para consultar seus dados. Aqui estão alguns exemplos:
+
+- **Retornar todos os documentos**:
+  ```
+  search=*&$count=true
+  ```
+
+- **Encontrar avaliações que mencionam um local específico**:
+  ```
+  search=locations:'Chicago'
+  ```
+
+- **Encontrar todas as avaliações negativas**:
+  ```
+  search=sentiment:'negative'
+  ```
+
+### 📄 Licença
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
