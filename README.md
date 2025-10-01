@@ -72,43 +72,48 @@ O diagrama a seguir ilustra a arquitetura da Plataforma de Busca com IA do Azure
 
 ```mermaid
 graph TD
-    subgraph "Data Sources"
-        A[PDF Documents] --> B{Azure Blob Storage}
-        C[Word Documents] --> B
-        D[Excel Files] --> B
-        E[PowerPoint Files] --> B
-        F[Images] --> B
+    subgraph "Fontes de Dados"
+        A[Documentos PDF] --> B[Azure Blob Storage]
+        C[Documentos Word] --> B
+        D[Planilhas Excel] --> B
+        E[Apresentações PowerPoint] --> B
+        F[Imagens] --> B
     end
 
-    subgraph "Azure AI Search Service"
+    subgraph "Azure AI Search"
         B --> G[Data Source Connector]
         G --> H[Skillset Pipeline]
-        H --> I[Text Extraction]
-        H --> J[Entity Recognition]
-        H --> K[Key Phrase Extraction]
-        H --> L[Sentiment Analysis]
-        H --> M[OCR Processing]
+        H --> I[Extração de Texto]
+        H --> J[Reconhecimento de Entidades]
+        H --> K[Extração de Frases-Chave]
+        H --> L[Análise de Sentimentos]
+        H --> M[Processamento OCR]
         
-        I --> N[Search Index]
+        I --> N[Índice de Busca]
         J --> N
         K --> N
         L --> N
         M --> N
     end
 
-    subgraph "Search Interface"
-        N --> O[Search API]
-        O --> P[Web Application]
-        P --> Q[Search Results]
-        P --> R[Faceted Navigation]
-        P --> S[Auto-suggestions]
+    subgraph "Interface de Busca"
+        N --> O[API de Busca]
+        O --> P[Aplicação Web]
+        P --> Q[Resultados de Busca]
+        P --> R[Navegação por Facetas]
+        P --> S[Sugestões Automáticas]
     end
 
-    subgraph "AI Services"
+    subgraph "Serviços Cognitivos"
         H --> T[Azure Cognitive Services]
         T --> U[Language Understanding]
         T --> V[Computer Vision]
         T --> W[Text Analytics]
+    end
+
+    subgraph "Monitoramento e Analytics"
+        X[Azure Monitor] --> Y[Métricas de Busca]
+        Z[Application Insights] --> AA[Performance Analytics]
     end
 ```
 
@@ -226,43 +231,48 @@ The following diagram illustrates the architecture of the Azure AI Search Platfo
 
 ```mermaid
 graph TD
-    subgraph "Data Sources"
-        A[PDF Documents] --> B{Azure Blob Storage}
-        C[Word Documents] --> B
-        D[Excel Files] --> B
-        E[PowerPoint Files] --> B
-        F[Images] --> B
+    subgraph "Fontes de Dados"
+        A[Documentos PDF] --> B[Azure Blob Storage]
+        C[Documentos Word] --> B
+        D[Planilhas Excel] --> B
+        E[Apresentações PowerPoint] --> B
+        F[Imagens] --> B
     end
 
-    subgraph "Azure AI Search Service"
+    subgraph "Azure AI Search"
         B --> G[Data Source Connector]
         G --> H[Skillset Pipeline]
-        H --> I[Text Extraction]
-        H --> J[Entity Recognition]
-        H --> K[Key Phrase Extraction]
-        H --> L[Sentiment Analysis]
-        H --> M[OCR Processing]
+        H --> I[Extração de Texto]
+        H --> J[Reconhecimento de Entidades]
+        H --> K[Extração de Frases-Chave]
+        H --> L[Análise de Sentimentos]
+        H --> M[Processamento OCR]
         
-        I --> N[Search Index]
+        I --> N[Índice de Busca]
         J --> N
         K --> N
         L --> N
         M --> N
     end
 
-    subgraph "Search Interface"
-        N --> O[Search API]
-        O --> P[Web Application]
-        P --> Q[Search Results]
-        P --> R[Faceted Navigation]
-        P --> S[Auto-suggestions]
+    subgraph "Interface de Busca"
+        N --> O[API de Busca]
+        O --> P[Aplicação Web]
+        P --> Q[Resultados de Busca]
+        P --> R[Navegação por Facetas]
+        P --> S[Sugestões Automáticas]
     end
 
-    subgraph "AI Services"
+    subgraph "Serviços Cognitivos"
         H --> T[Azure Cognitive Services]
         T --> U[Language Understanding]
         T --> V[Computer Vision]
         T --> W[Text Analytics]
+    end
+
+    subgraph "Monitoramento e Analytics"
+        X[Azure Monitor] --> Y[Métricas de Busca]
+        Z[Application Insights] --> AA[Performance Analytics]
     end
 ```
 
