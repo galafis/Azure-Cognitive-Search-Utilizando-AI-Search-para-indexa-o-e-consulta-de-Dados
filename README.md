@@ -4,7 +4,14 @@
 
 **Autor:** Gabriel Demetrios Lafis
 
+![Build Status](https://img.shields.io/github/actions/workflow/status/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados/ci-cd.yml?style=for-the-badge)
+![License](https://img.shields.io/github/license/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados?style=for-the-badge)
+![Stars](https://img.shields.io/github/stars/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados?style=for-the-badge)
+
+[**Ver Demo Interativa**](https://galafis.github.io/Azure-AI-Search-Demo/) | [**Documentação da API**](https://galafis.github.io/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados/api-docs)
+
 ![Azure AI Search Platform](./advanced-hero-image.png)
+
 
 ---
 
