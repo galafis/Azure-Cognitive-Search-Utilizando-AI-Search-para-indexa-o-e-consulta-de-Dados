@@ -13,7 +13,9 @@
 ![License](https://img.shields.io/github/license/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados?style=for-the-badge)
 
-[**Ver Código no GitHub**](https://github.com/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados) | [**Documentação Completa**](https://github.com/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados/blob/main/README.md)
+[**Ver Código no GitHub**](https://github.com/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados)
+
+## 🖼️ Imagem Hero
 
 ![Azure AI Search Platform](./advanced-hero-image.png)
 
@@ -228,54 +230,7 @@ The platform is designed to handle large volumes of unstructured data, such as d
 
 ### Solution Architecture
 
-The following diagram illustrates the architecture of the Azure AI Search Platform:
-
-```mermaid
-graph TD
-    subgraph "Fontes de Dados"
-        A[Documentos PDF] --> B[Azure Blob Storage]
-        C[Documentos Word] --> B
-        D[Planilhas Excel] --> B
-        E[Apresentações PowerPoint] --> B
-        F[Imagens] --> B
-    end
-
-    subgraph "Azure AI Search"
-        B --> G[Data Source Connector]
-        G --> H[Skillset Pipeline]
-        H --> I[Extração de Texto]
-        H --> J[Reconhecimento de Entidades]
-        H --> K[Extração de Frases-Chave]
-        H --> L[Análise de Sentimentos]
-        H --> M[Processamento OCR]
-        
-        I --> N[Índice de Busca]
-        J --> N
-        K --> N
-        L --> N
-        M --> N
-    end
-
-    subgraph "Interface de Busca"
-        N --> O[API de Busca]
-        O --> P[Aplicação Web]
-        P --> Q[Resultados de Busca]
-        P --> R[Navegação por Facetas]
-        P --> S[Sugestões Automáticas]
-    end
-
-    subgraph "Serviços Cognitivos"
-        H --> T[Azure Cognitive Services]
-        T --> U[Language Understanding]
-        T --> V[Computer Vision]
-        T --> W[Text Analytics]
-    end
-
-    subgraph "Monitoramento e Analytics"
-        X[Azure Monitor] --> Y[Métricas de Busca]
-        Z[Application Insights] --> AA[Performance Analytics]
-    end
-```
+The architecture of the Azure AI Search Platform is illustrated in the diagram above in the Portuguese section.
 
 ### How to Run the Project
 
