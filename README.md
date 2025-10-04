@@ -1,5 +1,4 @@
 
-
 # Azure AI Search Platform
 
 **Autor:** Gabriel Demetrios Lafis
@@ -8,7 +7,7 @@
 ![Azure](https://img.shields.io/badge/Microsoft-Azure-blue?style=for-the-badge&logo=microsoft-azure&logoColor=white)
 ![Azure AI Search](https://img.shields.io/badge/Azure-AI%20Search-blue?style=for-the-badge&logo=microsoft-azure&logoColor=white)
 ![Azure Cognitive Services](https://img.shields.io/badge/Azure-Cognitive%20Services-blue?style=for-the-badge&logo=microsoft-azure&logoColor=white)
-![REST API](https://img.shields.io/badge/REST-API-green?style=for-the-badge&logo=api&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 ![JSON](https://img.shields.io/badge/JSON-Data-orange?style=for-the-badge&logo=json&logoColor=white)
 ![License](https://img.shields.io/github/license/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/galafis/Azure-Cognitive-Search-Utilizando-AI-Search-para-indexa-o-e-consulta-de-Dados?style=for-the-badge)
@@ -24,22 +23,22 @@
 
 ```
 .
-├── src/                 # Código fonte principal
-│   ├── api/             # Endpoints da API
-│   ├── models/          # Modelos de dados
-│   ├── services/        # Lógica de negócio
-│   └── utils/           # Utilitários
-├── tests/               # Testes unitários e integração
-├── docs/                # Documentação
-├── frontend/            # Interface do usuário
-│   ├── components/      # Componentes React
-│   ├── assets/          # Imagens e estilos
-│   └── public/          # Arquivos públicos
-├── config/              # Configurações
-└── requirements.txt     # Dependências Python
+├── src/                 # Código fonte principal da aplicação Flask
+│   ├── app.py           # Aplicação Flask principal
+│   └── config.py        # Configurações da aplicação (ex: variáveis de ambiente)
+├── tests/               # Testes unitários e de integração
+├── data/                # Dados de exemplo para indexação
+├── frontend/            # Interface do usuário (se aplicável)
+├── .env                 # Variáveis de ambiente (NÃO commitado)
+├── requirements.txt     # Dependências Python
+├── setup_search_index.py # Script para criar o índice de busca no Azure AI Search
+├── upload_sample_documents.py # Script para fazer upload de documentos de exemplo
+├── CODE_OF_CONDUCT.md   # Código de Conduta
+├── CONTRIBUTING.md      # Guia de Contribuição
+├── LICENSE              # Licença do projeto
+├── README.md            # Este arquivo README
+└── advanced-hero-image.png # Imagem hero do projeto
 ```
-
-
 
 ---
 
@@ -47,7 +46,7 @@
 
 ### Visão Geral
 
-Este projeto demonstra uma implementação avançada do Azure Cognitive Search (agora Azure AI Search), uma plataforma de busca empresarial que utiliza inteligência artificial para indexação e consulta de dados. A solução apresenta um sistema completo de busca semântica, com capacidades de processamento de linguagem natural, extração de entidades e análise de sentimentos.
+Este projeto demonstra uma implementação avançada do Azure AI Search (anteriormente Azure Cognitive Search), uma plataforma de busca empresarial que utiliza inteligência artificial para indexação e consulta de dados. A solução apresenta um sistema completo de busca semântica, com capacidades de processamento de linguagem natural, extração de entidades e análise de sentimentos.
 
 A plataforma é projetada para lidar com grandes volumes de dados não estruturados, como documentos, imagens e conteúdo multimídia, transformando-os em informações pesquisáveis e insights acionáveis. É uma demonstração prática de como implementar soluções de busca inteligente em ambientes corporativos.
 
@@ -73,52 +72,7 @@ A plataforma é projetada para lidar com grandes volumes de dados não estrutura
 
 O diagrama a seguir ilustra a arquitetura da Plataforma de Busca com IA do Azure:
 
-```mermaid
-graph TD
-    subgraph "Fontes de Dados"
-        A[Documentos PDF] --> B[Azure Blob Storage]
-        C[Documentos Word] --> B
-        D[Planilhas Excel] --> B
-        E[Apresentações PowerPoint] --> B
-        F[Imagens] --> B
-    end
-
-    subgraph "Azure AI Search"
-        B --> G[Data Source Connector]
-        G --> H[Skillset Pipeline]
-        H --> I[Extração de Texto]
-        H --> J[Reconhecimento de Entidades]
-        H --> K[Extração de Frases-Chave]
-        H --> L[Análise de Sentimentos]
-        H --> M[Processamento OCR]
-        
-        I --> N[Índice de Busca]
-        J --> N
-        K --> N
-        L --> N
-        M --> N
-    end
-
-    subgraph "Interface de Busca"
-        N --> O[API de Busca]
-        O --> P[Aplicação Web]
-        P --> Q[Resultados de Busca]
-        P --> R[Navegação por Facetas]
-        P --> S[Sugestões Automáticas]
-    end
-
-    subgraph "Serviços Cognitivos"
-        H --> T[Azure Cognitive Services]
-        T --> U[Language Understanding]
-        T --> V[Computer Vision]
-        T --> W[Text Analytics]
-    end
-
-    subgraph "Monitoramento e Analytics"
-        X[Azure Monitor] --> Y[Métricas de Busca]
-        Z[Application Insights] --> AA[Performance Analytics]
-    end
-```
+![Diagrama de Arquitetura](./diagram.png)
 
 ### Como Executar o Projeto
 
@@ -126,7 +80,7 @@ graph TD
 
 - Assinatura ativa do Microsoft Azure
 - Azure CLI instalado e configurado
-- Python 3.8+ para scripts de configuração
+- Python 3.8+ e `pip` para gerenciamento de dependências
 - Conhecimento básico de serviços Azure
 
 #### Configuração dos Recursos Azure
@@ -166,29 +120,37 @@ graph TD
 
 2.  **Configure as variáveis de ambiente:**
 
-    Crie um arquivo `.env` com as seguintes configurações:
+    Crie um arquivo `.env` na raiz do projeto com as seguintes configurações (substitua os valores pelos seus):
 
-    ```
-    AZURE_SEARCH_SERVICE_NAME=aisearch-demo-service
+    ```ini
+    AZURE_SEARCH_SERVICE_NAME=seu-nome-do-servico-search
     AZURE_SEARCH_API_KEY=sua-chave-de-api-do-search
     AZURE_STORAGE_CONNECTION_STRING=sua-connection-string-do-storage
     AZURE_COGNITIVE_SERVICES_KEY=sua-chave-dos-servicos-cognitivos
+    AZURE_SEARCH_ENDPOINT=https://seu-nome-do-servico-search.search.windows.net
+    AZURE_SEARCH_INDEX=documents
     ```
 
-3.  **Execute os scripts de configuração:**
+3.  **Instale as dependências:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Execute os scripts de configuração:**
 
     ```bash
     python setup_search_index.py
     python upload_sample_documents.py
     ```
 
-4.  **Inicie a aplicação web:**
+5.  **Inicie a aplicação web:**
 
     ```bash
-    python app.py
+    python src/app.py
     ```
 
-5.  **Acesse a interface:**
+6.  **Acesse a interface:**
 
     Abra seu navegador e acesse `http://localhost:5000`.
 
@@ -206,7 +168,7 @@ graph TD
 
 ### Overview
 
-This project demonstrates an advanced implementation of Azure Cognitive Search (now Azure AI Search), an enterprise search platform that uses artificial intelligence for data indexing and querying. The solution presents a complete semantic search system with natural language processing capabilities, entity extraction, and sentiment analysis.
+This project demonstrates an advanced implementation of Azure AI Search (formerly Azure Cognitive Search), an enterprise search platform that uses artificial intelligence for data indexing and querying. The solution presents a complete semantic search system with natural language processing capabilities, entity extraction, and sentiment analysis.
 
 The platform is designed to handle large volumes of unstructured data, such as documents, images, and multimedia content, transforming them into searchable information and actionable insights. It is a practical demonstration of how to implement intelligent search solutions in corporate environments.
 
@@ -238,7 +200,7 @@ The architecture of the Azure AI Search Platform is illustrated in the diagram a
 
 - Active Microsoft Azure subscription
 - Azure CLI installed and configured
-- Python 3.8+ for configuration scripts
+- Python 3.8+ and `pip` for dependency management
 - Basic knowledge of Azure services
 
 #### Azure Resources Configuration
@@ -278,29 +240,37 @@ The architecture of the Azure AI Search Platform is illustrated in the diagram a
 
 2.  **Configure environment variables:**
 
-    Create a `.env` file with the following settings:
+    Create a `.env` file in the project root with the following settings (replace values with yours):
 
-    ```
-    AZURE_SEARCH_SERVICE_NAME=aisearch-demo-service
+    ```ini
+    AZURE_SEARCH_SERVICE_NAME=your-search-service-name
     AZURE_SEARCH_API_KEY=your-search-api-key
     AZURE_STORAGE_CONNECTION_STRING=your-storage-connection-string
     AZURE_COGNITIVE_SERVICES_KEY=your-cognitive-services-key
+    AZURE_SEARCH_ENDPOINT=https://your-search-service-name.search.windows.net
+    AZURE_SEARCH_INDEX=documents
     ```
 
-3.  **Run configuration scripts:**
+3.  **Install dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Run configuration scripts:**
 
     ```bash
     python setup_search_index.py
     python upload_sample_documents.py
     ```
 
-4.  **Start the web application:**
+5.  **Start the web application:**
 
     ```bash
-    python app.py
+    python src/app.py
     ```
 
-5.  **Access the interface:**
+6.  **Access the interface:**
 
     Open your browser and go to `http://localhost:5000`.
 
@@ -311,3 +281,4 @@ The architecture of the Azure AI Search Platform is illustrated in the diagram a
 - **Customer Support**: Search in knowledge bases for technical support and FAQ.
 - **Legal Research**: Semantic search in contracts, policies, and legal documents.
 - **Content Analysis**: Extraction of insights and trends from large volumes of corporate documents.
+
